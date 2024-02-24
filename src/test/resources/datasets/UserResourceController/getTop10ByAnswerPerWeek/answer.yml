@@ -1,0 +1,143 @@
+answer:
+  - id: 100
+    user_id: 100
+    question_id: 100
+    html_body: "test100"
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: true
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 101
+    user_id: 101
+    html_body: "test101"
+    question_id: 101
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 102
+    user_id: 102
+    html_body: "test102"
+    question_id: 102
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 103
+    user_id: 104
+    html_body: "test103"
+    question_id: 102
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 104
+    user_id: 103
+    question_id: 100
+    html_body: "test104"
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: true
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 105
+    user_id: 105
+    html_body: "test105"
+    question_id: 101
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 106
+    user_id: 106
+    html_body: "test106"
+    question_id: 102
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 107
+    user_id: 107
+    html_body: "test107"
+    question_id: 100
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 108
+    user_id: 104
+    question_id: 101
+    html_body: "test108"
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: true
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 109
+    user_id: 105
+    html_body: "test109"
+    question_id: 100
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 110
+    user_id: 102
+    html_body: "test110"
+    question_id: 101
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 111
+    user_id: 102
+    html_body: "test111"
+    question_id: 102
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"
+
+  - id: 112
+    user_id: 102
+    html_body: "test112"
+    question_id: 102
+    is_deleted: false
+    is_deleted_by_moderator: false
+    is_helpful: false
+    persist_date: "[DAY,NOW]"
+    date_accept_time: "[DAY,NOW]"
+    update_date: "[DAY,NOW]"

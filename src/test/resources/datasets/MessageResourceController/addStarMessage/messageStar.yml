@@ -1,0 +1,35 @@
+message_star:
+  - id: 100
+    user_id: 100
+    message_id: 100
+    persist_date: "[DAY,NOW]"
+
+  - id: 101
+    user_id: 101
+    message_id: 102
+    persist_date: "[DAY,NOW]"
+
+  - id: 102
+    user_id: 101
+    message_id: 103
+    persist_date: "[DAY,NOW]"
+
+  - id: 103
+    user_id: 102
+    message_id: 104
+    persist_date: "[DAY,NOW]"
+
+  - id: 104
+    user_id: 103
+    message_id: 102
+    persist_date: "[DAY,NOW]"
+
+  - id: 105
+    user_id: 104
+    message_id: 102
+    persist_date: "[DAY,NOW]"
+
+  - id: 106
+    user_id: 104
+    message_id: 104
+    persist_date: "[DAY,NOW]"

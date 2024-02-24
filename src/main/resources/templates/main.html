@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{../static/css/chat.css}" href="/../static/css/chat.css"/>
+
+</head>
+<body>
+<header id="header"></header>
+<div id="sidebarTegs">
+    <div class="-ignored s-sidebarwidget mb16">
+        <div class="s-sidebarwidget--header d-flex">
+            <span class="flex--item fl1" style=" color: white;">Отслеживаемые метки</span>
+            <a class="js-edit-ignored-tags flex--item ml12 " style="color: white;margin: auto;font-size: smaller;"
+               href="#" onclick="look1('link'); return false;">Править</a>
+        </div>
+        <div id="result" class="result">
+
+
+        </div>
+        <div id="link" class="s-sidebarwidget--content fd-column">
+
+            <form id="dataForm" class="mt8 d-flex">
+                <input class="form-control" oninput="getTagsValueTracked()" list="datalistOptions" id="exampleDataList"
+                       placeholder="Введите для поиска..." _mstplaceholder="3304626">
+                <input id="addTrack" value="+" onclick="getIdTrackedTeg()" type="button" class="btn btn-secondary" _msthash="1959061"
+                       _msttexthash="1184625" style="background-color: #007bff">
+                <datalist id="datalistOptions" class="datalist">
+                </datalist>
+                <div id="resultID" class="resultID"></div>
+            </form>
+
+        </div>
+    </div>
+    <div class="-ignored s-sidebarwidget mb16">
+
+        <div class="s-sidebarwidget--header d-flex">
+            <span class="flex--item fl1" style=" color: white;">Игнорируемые метки</span>
+            <a class="js-edit-ignored-tags flex--item ml12 "
+               style="color: white;margin: auto;font-size: smaller;display: block" href="#"
+               onclick="look('link1'); return false;">Править</a>
+        </div>
+        <div id="result1" class="result1">
+
+        </div>
+        <div id="link1" class="s-sidebarwidget--content fd-column">
+
+            <form class="mt8 d-flex">
+
+                <input class="form-control" oninput="getTagsValueIgnore()" list="datalistOptions1" id="exampleDataList1"
+                       placeholder="Введите для поиска..." _mstplaceholder="3304626">
+                <input id="addIgnore" value="+" onclick="getIdIgnoredTeg()" type="button" class="btn btn-secondary"
+                       _msthash="1959061"
+                       _msttexthash="1184625" style="background-color: #007bff">
+
+                <datalist id="datalistOptions1">
+
+                </datalist>
+
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-2">
+            <sidebar id="sidebar"></sidebar>
+        </div>
+        <div id="mainbar" class="col-md-8 mt-4" style="left: 50px;">
+            <br/>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h3 id="title">Лучшие вопросы</h3>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="/question/add" class="text-nowrap btn btn-primary">Задать вопрос</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="align-items-end my-4 ml-auto">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-outline-primary"
+                           title="Вопросы, которые могут быть вам интересны на основании ваших истории и предпочтительных меток"
+                           href="#">Интересные</a>
+                        <a class="btn btn-outline-primary"
+                           title="Вопросы, для которых действует конкурс"
+                           href="#">
+                            <span class="badge-primary badge-pill">100</span>
+                            Конкурсные</a>
+                        <a class="btn btn-outline-primary"
+                           title="Вопросы с наибольшим числом просмотров, ответов и голосов за последние несколько дней"
+                           href="#">Популярные</a>
+                        <a class="btn btn-outline-primary"
+                           title="Вопросы с наибольшим числом просмотров, ответов и голосов за неделю"
+                           href="#">За неделю</a>
+                        <a class="btn btn-outline-primary"
+                           title="Вопросы с наибольшим числом просмотров, ответов и голосов за месяц"
+                           href="#">За месяц</a>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div id="qlist-wrapper">
+                <div id="question-minilist">
+                    <div>
+                        <div class="row d-flex">
+                            <div class="card-group
+
+col-md-2">
+                                <div class="card text-center">
+                                    <h6 class="card-title text-muted m-0">0</h6>
+                                    <p class="card-text text-muted "><small>голосов</small></p>
+                                </div>
+                                <div class="card text-center">
+                                    <h6 class="card-title m-0 text-muted">0</h6>
+                                    <p class="card-text text-muted"><small>ответов</small></p>
+                                </div>
+                                <div class="card text-center">
+                                    <h6 class="card-title m-0 text-muted">12</h6>
+                                    <p class="card-text text-muted"><small>показов</small></p>
+                                </div>
+                            </div>
+                            <div class="container-fluid col-md-9">
+                                <div class="d-block">
+                                    <a class="h5" href="#">Почему не собирает данные на след странице?</a>
+                                </div>
+                                <div class="row">
+                                    <div class="d-flex mt-2">
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">python</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">парсер</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">selenium</a>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex ml-auto mt-0 align-items-center">
+                                        <a href="#" class="card-link text-muted" title="time">
+                                            <small>изменен 11 часов назад</small>
+                                        </a>
+                                        <a href="#" class="card-link mx-1"><small>Getteg</small></a>
+                                        <span class="badge-light" title="уровень репутации"><small>87</small></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div>
+                        <div class="row d-flex">
+                            <div class="card-group col-md-2">
+                                <div class="card text-center">
+                                    <h6 class="card-title text-muted m-0">0</h6>
+                                    <p class="card-text text-muted "><small>голосов</small></p>
+                                </div>
+                                <div class="card text-center">
+                                    <h6 class="card-title m-0 text-muted">0</h6>
+                                    <p class="card-text text-muted"><small>ответов</small></p>
+                                </div>
+                                <div class="card text-center">
+                                    <h6 class="card-title m-0 text-muted">10</h6>
+                                    <p class="card-text text-muted"><small>показов</small></p>
+                                </div>
+                            </div>
+                            <div class="container-fluid col-md-9">
+                                <div class="d-block">
+                                    <a class="h5" href="#">Выпадающий список не выпадает вниз</a>
+                                </div>
+                                <div class="row">
+                                    <div class="d-flex mt-2">
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">html</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">css</a>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex ml-auto mt-0 align-items-center">
+                                        <a href="#" class="card-link text-muted" title="time">
+                                            <small>задан 11 часов назад</small>
+                                        </a>
+                                        <a href="#" class="card-link mx-1"><small>close_ebola</small></a>
+                                        <span class="badge-light" title="уровень репутации"><small>1</small></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div>
+                        <div class="row d-flex">
+                            <div class="card-group col-md-2">
+                                <div class="card text-center">
+                                    <h6 class="card-title text-muted m-0">1</h6>
+                                    <p class="card-text text-muted "><small>голос</small></p>
+                                </div>
+                                <div class="card border-success text-success text-center">
+                                    <h6 class="card-title m-0">1</h6>
+                                    <p class="card-text"><small>ответ</small></p>
+                                </div>
+                                <div class="card text-center">
+                                    <h6 class="card-title m-0 text-muted">7</h6>
+                                    <p class="card-text text-muted"><small>показов</small></p>
+                                </div>
+                            </div>
+                            <div class="container-fluid col-md-9">
+                                <div class="d-block">
+                                    <a class="h5" href="#">Кликабельная ссылка (forward) на конкретное сообщение
+                                        телеграма</a>
+                                </div>
+                                <div class="row">
+                                    <div class="d-flex mt-2">
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">telegram-bot</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">telegram</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">aiogram</a>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex ml-auto mt-0 align-items-center">
+                                        <a href="#" class="card-link text-muted" title="time">
+                                            <small>ответ дан 12 часов назад</small>
+                                        </a>
+                                        <a href="#" class="card-link mx-1"><small>html css</small></a>
+                                        <span class="badge-light" title="уровень репутации"><small>36</small></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div>
+                        <div class="row d-flex">
+                            <div class="card-group col-md-2">
+                                <div class="card text-center">
+                                    <h6 class="card-title text-muted m-0">0</h6>
+                                    <p
+                                            class="card-text text-muted "><small>голосов</small></p>
+                                </div>
+                                <div class="card text-center">
+                                    <h6 class="card-title m-0 text-muted">0</h6>
+                                    <p class="card-text text-muted"><small>ответов</small></p>
+                                </div>
+                                <div class="card text-center">
+                                    <h6 class="card-title m-0 text-muted">29</h6>
+                                    <p class="card-text text-muted"><small>показов</small></p>
+                                </div>
+                            </div>
+                            <div class="container-fluid col-md-9">
+                                <div class="d-block">
+                                    <a class="h5" href="#">Как передать параметр из одного метода контроллера в
+                                        другой</a>
+                                </div>
+                                <div class="row">
+                                    <div class="d-flex mt-2">
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">java</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">spring</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">hibernate</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">mvc</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">jsp</a>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex ml-auto mt-0 align-items-center">
+                                        <a href="#" class="card-link text-muted" title="time">
+                                            <small>изменен 12 часов назад</small>
+                                        </a>
+                                        <a href="#" class="card-link mx-1"><small>linkforget</small></a>
+                                        <span class="badge-light" title="уровень репутации"><small>1</small></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div>
+                        <div class="row d-flex">
+                            <div class="card-group col-md-2">
+                                <div class="card text-center">
+                                    <h6 class="card-title text-muted m-0">2</h6>
+                                    <p class="card-text text-muted "><small>голоса</small></p>
+                                </div>
+                                <div class="card text-white bg-success text-center">
+                                    <h6 class="card-title m-0">1</h6>
+                                    <p class="card-text"><small>ответ</small></p>
+                                </div>
+                                <div class="card text-center">
+                                    <h6 class="card-title m-0 text-muted">33</h6>
+                                    <p class="card-text text-muted"><small>показа</small></p>
+                                </div>
+                            </div>
+                            <div class="container-fluid col-md-9">
+                                <div class="d-block">
+                                    <a class="h5" href="#">Как реализовать качественный эффект свечения графическим
+                                        примитивам средствами C# GDI+</a>
+                                </div>
+                                <div class="row">
+                                    <div class="d-flex mt-2">
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">c#</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">.net</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">winforms</a>
+                                        </div>
+                                        <div class="card mr-2">
+                                            <a class="card-link btn-light" href="#">gdi</a>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex ml-auto mt-0 align-items-center">
+                                        <a href="#" class="card-link text-muted" title="time">
+                                            <small>изменен 13 часов назад</small>
+                                        </a>
+                                        <a href="#" class="card-link mx-1"><small>aepot</small></a>
+                                        <span class="badge-light" title="уровень репутации"><small>29.4k</small></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <a href="questions.html" class="btn btn-primary float-right">Просмотреть другие вопросы</a>
+        </div>
+    </div>
+
+    <div class="fixed-bottom">
+        <button class="btn btn-outline-primary float-right mb-3 mr-3 " id="openButton" style="width: 16%">ЧАТ</button>
+    </div>
+
+    <div id="chat-page" style="display: none">
+        <div class="chat-container">
+            <div class="chat-header">
+                <h3>Kata chat</h3>
+            </div>
+            <div class="connecting">Connecting...</div>
+            <ul id="messageArea">
+
+            </ul>
+            <form id="messageForm" name="messageForm">
+                <div class="form-group">
+                    <div class="input-group clearfix">
+                        <input type="text" id="message" placeholder="Type a message..."
+                               autocomplete="off" class="form-control"/>
+
+                        <button type="submit" class="btn btn-outline-success" id="btnSend" style="height: 38px">Send
+                        </button>
+
+                        <button type="button" id="closeButton" class="btn btn-outline-danger mt-2"
+                                style="width: 97%; height: 35px">Закрыть
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<footer id="footer"></footer>
+<script type="module" src="../static/js/user_auth_check.js"></script>
+<script src="../static/js/header.js"></script>
+<script src="../static/js/sidebar.js"></script>
+<script
+        src="../static/js/sidebarTags.js"></script>
+
+<script src="../static/js/footer.js"></script>
+<script src="../static/js/logout.js"></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="../static/js/chat.js" defer="defer"></script>
+
+
+</body>
+</html>

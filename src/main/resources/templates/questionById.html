@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QuestionById</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="/js/user_auth_check.js"></script>
+</head>
+<body>
+<header id="header"></header>
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-lg-2">
+            <aside id="sidebar"></aside>
+        </div>
+        <div class="col-lg-10">
+            <br/>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h3 id="title"></h3>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="btn btn-primary text-nowrap" style="flex-basis: 15%;"
+                                       href="/templates/question.html">
+                                        Задать вопрос</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex post-header">
+                            <div class="flex--item mr-3">
+                                <span class="fc-light mr2" style="color: gray;">Вопрос задан</span>
+                                <time class="post-header__create"></time>
+                            </div>
+                            <div class="flex--item mr-3">
+                                <span class="fc-light mr2" style="color: gray;">Последняя активность</span>
+                                <time class="post-header__update"></time>
+                            </div>
+                            <div class="flex--item">
+                                <span class="fc-light mr2" style="color: gray;">Просмотры</span>
+                                <span class="post-header__view-count"></span>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-1 text-center">
+                                    <div class="vote-block"></div>
+                                </div>
+                                <div class="col-md-11 post-layout">
+                                    <div id="description"></div>
+                                    <div class="post-tags"></div>
+                                    <div class="more-info d-flex justify-content-between align-items-center"
+                                         style="flex-basis: 75%;">
+                                        <div class="share-edit-follow" style="align-self: baseline;">
+                                            <a href="" title="Короткая постоянная ссылка на этот вопрос">
+                                                <span style="color: gray;">Поделиться</span></a>
+                                            <a href="" title="Отредактируйте сообщение, чтобы улучшить его">
+                                                <span style="color: gray;">Править</span></a>
+                                            <a href="" title="Нажмите отслеживать, чтобы получать уведомления">
+                                                <span style="color: gray;">Отслеживать</span></a>
+                                        </div>
+                                        <div class="post-author"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="post-comments">
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-12" id="answers">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <h4 id="answers-count"></h4>
+                                </div>
+                                <div class="col-md-5">
+									<span class="answers-sort">
+										<span class="border" style="padding: 10px; margin: 30px;">
+											<a href="#" class="text-secondary">
+												<span class="border-right" style="padding-top: 10px; padding-bottom: 10px;
+												padding-right: 10px;">Текущие</span>
+											</a>
+											<a href="#" class="text-secondary">
+												<span class="border-right"
+                                                      style="padding: 10px;">По дате публикации</span>
+											</a>
+											<a href="#" class="text-secondary">
+												<span style="padding-left: 10px;">Голоса</span>
+											</a>
+										</span>
+									</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid answers-list mt-3">
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <form id="post-form" action="" method="post" class="js-add-answer-component post-form">
+                            <input type="hidden" id="post-id" value="642353">
+                            <h2 class="space">Ваш ответ</h2>
+                            <div id="post-editor" class="post-editor js-post-editor">
+                                <div class="ps-relative">
+                                    <div class="wmd-container mb12">
+                                        <div class="js-stacks-validation">
+                                            <div class="ps-relative">
+                                                <label for="wmd-input"></label>
+                                                <textarea id="wmd-input" name="post-text"
+                                                          class="wmd-input s-input bar0 js-post-body-field"
+                                                          data-post-type-id="2" cols="137" rows="5" tabindex="101"
+                                                          data-min-length=""></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <aside class="d-flex ai-start jc-space-between js-answer-help s-notice s-notice__warning pb0 d-none"
+                                       aria-hidden="true">
+                                    <div class="flex--item pt8">
+                                        <p>Спасибо за ваш ответ!</p>
+                                        <ul>
+                                            <li>Пожалуйста, убедитесь, что <em>публикуемое сообщение отвечает на
+                                                поставленный вопрос</em>.
+                                                Предоставьте как можно больше деталей.
+                                            </li>
+                                        </ul>
+                                        <p>Но <em>избегайте</em> …</p>
+                                        <ul>
+                                            <li>Просьб помощи, уточнений или ответов на темы не относящиеся к вопросу.
+                                            </li>
+                                            <li>Ответов, основанных на мнениях; приводите аргументы основанные только на
+                                                реальном опыте.
+                                            </li>
+                                        </ul>
+                                        <p>Также обратите внимание на заметку в справочном центре о том,
+                                            <a href="">как писать ответы</a>.</p>
+                                    </div>
+                                </aside>
+                            </div>
+                            <div class="form-submit cbt d-flex gsx gs4">
+                                <button id="submit-button" type="submit" class="btn btn-primary" tabindex="120"
+                                        title="Нажимая на кнопку «Отправить ответ», вы соглашаетесь с нашим пользовательским соглашением, политикой конфиденциальности и политикой о куки">
+                                    Отправить ответ
+                                </button>
+                            </div>
+                        </form>
+                        <br/>
+                        <div>
+                            <p>
+                                Всё ещё ищете ответ? Посмотрите другие вопросы с метками
+                                <a href="" class="mr-2" title="" rel="tag">#ajax</a>
+                                <a href="" class="mr-2" title="" rel="tag">#wordpress</a>
+                                <a href="" class="mr-2" title="" rel="tag">#link</a>
+                                или
+                                <a href="/templates/question.html">задайте свой вопрос</a>.
+                            </p>
+                        </div>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer id="footer"></footer>
+<script src="/js/header.js"></script>
+<script src="/js/sidebar.js"></script>
+<script src="/js/footer.js"></script>
+<script src="/js/question.js"></script>
+</body>
+</html>

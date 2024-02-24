@@ -1,0 +1,8 @@
+single_chat:
+  - chat_id: 100
+    user_one_id: 100
+    use_two_id: 101
+
+  - chat_id: 101
+    user_one_id: 100
+    use_two_id: 102

@@ -1,0 +1,1 @@
+alter table group_chat add author_id bigint;

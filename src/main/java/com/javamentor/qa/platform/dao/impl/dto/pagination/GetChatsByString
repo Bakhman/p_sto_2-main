@@ -1,0 +1,107 @@
+package com.javamentor.qa.platform.dao.impl.dto.pagination;
+
+import com.javamentor.qa.platform.dao.abstracts.dto.pagination.PaginationDtoAble;
+import com.javamentor.qa.platform.models.dto.ChatDto;
+import com.javamentor.qa.platform.models.entity.user.User;
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+@Repository("GetChatsByString")
+public class GetChatsByString implements PaginationDtoAble<ChatDto> {
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public List<ChatDto> getItems(Map<String, Object> param) {
+        int currentPageNumber = (int) param.get("currentPageNumber");
+        int itemsOnPage = (int) param.get("itemsOnPage");
+        Long userId = ((User) param.get("user")).getId();
+        String string = (String) param.get("string");
+
+        List<ChatDto> listAllChats = new ArrayList<>();
+
+        List<ChatDto> listOfSingleChat = entityManager.createQuery(
+                        "SELECT new com.javamentor.qa.platform.models.dto.ChatDto " +
+                                "(c.id, " +
+                                "CASE WHEN c.chatType = 0 AND s.userOne.id = u.id THEN s.useTwo.nickname " +
+                                "WHEN c.chatType = 0 AND s.useTwo.id = u.id THEN s.userOne.nickname END  , " +
+                                "CASE WHEN c.chatType = 0 AND s.userOne.id = u.id THEN s.useTwo.imageLink " +
+                                "WHEN c.chatType = 0 AND s.useTwo = u.id THEN s.userOne.imageLink END , " +
+                                "m.message, " +
+                                "m.persistDate," +
+                                "c.isChatPin) " +
+                                "FROM Chat c " +
+                                "LEFT JOIN UserChatPin ucp ON ucp.chat.id = c.id " +
+                                "AND c.isChatPin = true " +
+                                "AND ucp.user.id = :userId " +
+                                "LEFT JOIN Message m ON m.chat.id = c.id AND " +
+                                "m.persistDate = (select max(persistDate) from m WHERE m.chat.id = c.id) " +
+                                "LEFT JOIN SingleChat s ON s.chat.id = c.id " +
+                                "LEFT JOIN User u ON u.id = :userId " +
+                                "WHERE (s.userOne.id = :userId OR s.useTwo.id = :userId) AND " +
+                                "(LOWER(s.userOne.nickname) LIKE LOWER(CONCAT('%', :string, '%')) OR " +
+                                "LOWER(s.useTwo.nickname) LIKE LOWER(CONCAT('%', :string, '%')))" +
+                                "ORDER BY c.isChatPin DESC, m.persistDate DESC",
+                        ChatDto.class)
+                .setParameter("userId", userId)
+                .setParameter("string", string)
+                .setFirstResult((currentPageNumber - 1) * itemsOnPage)
+                .setMaxResults(itemsOnPage)
+                .getResultList();
+
+        List<ChatDto> listOfGroupChat = entityManager.createQuery(
+                        "SELECT new com.javamentor.qa.platform.models.dto.ChatDto " +
+                                "(c.id, " +
+                                "c.title , " +
+                                "g.imageLink , " +
+                                "m.message, " +
+                                "m.persistDate," +
+                                "c.isChatPin) " +
+                                "FROM Chat c " +
+                                "LEFT JOIN UserChatPin ucp ON ucp.chat.id = c.id " +
+                                "AND c.isChatPin = true " +
+                                "AND ucp.user.id = :userId " +
+                                "LEFT JOIN Message m ON m.chat.id = c.id AND " +
+                                "m.persistDate = (select max(persistDate) from m WHERE m.chat.id = c.id)" +
+                                "LEFT JOIN GroupChat g ON g.chat.id = c.id " +
+                                "LEFT JOIN g.users ul " +
+                                "LEFT JOIN User u ON u.id = :userId " +
+                                "WHERE LOWER(c.title) LIKE LOWER(CONCAT('%', :string, '%')) AND ul.id = :userId " +
+                                "ORDER BY c.isChatPin DESC, m.persistDate DESC",
+                        ChatDto.class)
+                .setParameter("userId", userId)
+                .setParameter("string", string)
+                .setFirstResult((currentPageNumber - 1) * itemsOnPage)
+                .setMaxResults(itemsOnPage)
+                .getResultList();
+
+        listAllChats.addAll(listOfSingleChat);
+        listAllChats.addAll(listOfGroupChat);
+
+        return listAllChats;
+    }
+
+    @Override
+    public int getTotalResultCount(Map<String, Object> param) {
+        int result = ((Long) entityManager.createQuery(
+                        "SELECT COUNT(c) FROM Chat c " +
+                                "LEFT JOIN SingleChat s ON s.chat.id = c.id " +
+                                "WHERE LOWER(s.userOne.nickname) LIKE LOWER(CONCAT('%', :string, '%')) " +
+                                "OR LOWER(s.useTwo.nickname) LIKE LOWER(CONCAT('%', :string, '%')) " +
+                                "AND c.isChatPin = true")
+                .setParameter("string", param.get("string"))
+                .getSingleResult()).intValue();
+        result += ((Long) entityManager.createQuery(
+                        "SELECT COUNT(c) FROM Chat c " +
+                                "WHERE LOWER(c.title) LIKE LOWER(CONCAT('%', :string, '%')) " +
+                                "AND c.isChatPin = true")
+                .setParameter("string", param.get("string"))
+                .getSingleResult()).intValue();
+        return result;
+    }
+}

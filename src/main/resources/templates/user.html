@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Users Community</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="/js/user_auth_check.js"></script>
+        <style>
+            .username a {
+                font-size: 1.05em;
+                font-weight: 500;
+            }
+            .user-location span {
+                padding-left: 0.3em;
+            }
+            .reputation span {
+                padding-left: 0.3em;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header id="header"></header>
+
+        <div class="container-fluid mt-5">
+            <div class="row">
+                <div class="col-lg-2">
+                    <sidebar id="sidebar"></sidebar>
+                </div>
+                <div class="col-lg-10 p-4">
+                    <h1 class="pb-2">Users</h1>
+                    <div class="d-flex bd-highlight mb-3">
+
+                        <div class="mr-auto bd-highlight">
+                            <input class="form-control me-2" type="search" id="search-input"  placeholder="Filter by user">
+                        </div>
+
+                        <div class="bd-highlight">
+                            <div class="btn-group" role="group" aria-label="Простой пример">
+                                <a class="btn btn-light" href="">Reputation</a>
+                                <a class="btn btn-light" href="">New users</a>
+                                <a class="btn btn-light" href="">Voters</a>
+                                <a class="btn btn-light" href="">Editors</a>
+                                <a class="btn btn-light" href="">Moderators</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="team">
+                        <div class="loading">LOADING...</div>
+                        <div class="users"></div>
+                    </div>
+
+                    <nav aria-label="Страницы">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:prevPage()" id="btn_prev">Предыдущая</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:nextPage()" id="btn_next">Следующая</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <footer id="footer"></footer>
+
+        <script src="/js/header.js"></script>
+        <script src="/js/sidebar.js"></script>
+        <script src="/js/footer.js"></script>
+        <script src="/js/pagi.js"></script>
+        <script src="/js/user.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    </body>
+</html>
