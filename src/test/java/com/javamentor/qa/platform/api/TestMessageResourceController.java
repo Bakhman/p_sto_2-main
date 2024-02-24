@@ -74,4 +74,5 @@ public class TestMessageResourceController extends AbstractApiTest {
                 .andExpect(jsonPath("currentPageNumber").value(1))
                 .andExpect(jsonPath("items.size()").value(0));
     }
+    
 }
